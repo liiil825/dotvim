@@ -67,9 +67,8 @@ highlight SpecialKey ctermfg=240 guifg=#585858
 
 set nocompatible
 imap jj <esc>
-"inoremap ,, <Esc> "设置,,为esc
+"inoremap ,, <Esc>
 
-"修改leader键为逗号
 let mapleader=","
 let maplocalleader = "\\"
 
