@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/lizhi/Projects/haogw/www.haogw.com'
+let g:netrw_dirhist_2='/Users/lizhi/Projects/haogw/www.haogw.com/public'
+let g:netrw_dirhist_3='/Users/lizhi/Projects/haogw/www.haogw.com/public/js'
+let g:netrw_dirhist_4='/Users/lizhi/Projects/haogw/www.haogw.com/public/js/models'
+let g:netrw_dirhist_5='/Users/lizhi/Projects/haogw/www.haogw.com/public/js'
+let g:netrw_dirhist_6='/Users/lizhi/Projects/haogw/www.haogw.com/public/js/views'

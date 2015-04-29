@@ -1,0 +1,35 @@
+snippet init:f "Description" !b
+initialize: function ( ${1:argument} ) {
+	${3}
+}${2:,}
+endsnippet
+
+snippet BBModel "Define Backbone Model"
+define([
+	'${1:backbone}'
+], function ( ${2:BB} ) {
+
+  'use strict'
+
+  var Model = $2.Model.extend({
+		${3}
+	});
+
+	return Model;
+});
+endsnippet
+
+snippet BBView "Define Backbone View"
+define([
+	'${1:backbone}'
+], function ( ${2:BB} ) {
+
+  'use strict'
+
+  var Model = $2.View.extend({
+		${3}
+	});
+
+	return Model;
+});
+endsnippet
