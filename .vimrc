@@ -119,6 +119,10 @@ vmap "+y :w !pbcopy<CR><CR>
 nmap "+y :.w !pbcopy<CR><CR>
 nmap "+p :r !pbpaste<CR><CR>
 
+" map for fold
+vnoremap <Space> za
+nnoremap <Space> za
+
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
