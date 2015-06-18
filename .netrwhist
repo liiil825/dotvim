@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/lizhi/Projects/haogw-wxmp/weixin/grunt_tasks/tasks'
 let g:netrw_dirhist_2='/Users/lizhi/Projects/haogw/m.haogw.com'
 let g:netrw_dirhist_3='/Users/lizhi/Projects/haogw-wxmp'
@@ -8,3 +8,4 @@ let g:netrw_dirhist_5='/usr/local/etc/nginx/sites-available'
 let g:netrw_dirhist_6='/Users/lizhi/.oh-my-zsh/plugins/git'
 let g:netrw_dirhist_7='/Users/lizhi/Projects/upcase/css_animation/animation-delay'
 let g:netrw_dirhist_8='/Users/lizhi/Projects/haogw-h5/haogw-h5/grunt_tasks/app/sass/plugins/frozenui/sass'
+let g:netrw_dirhist_9='/Users/lizhi/vagrant/docker-wordpress-nginx'

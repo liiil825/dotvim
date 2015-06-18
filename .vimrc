@@ -68,14 +68,6 @@ highlight NonText    ctermfg=240 guifg=#585858
 highlight SpecialKey ctermfg=240 guifg=#585858
 
 set nocompatible
-"imap jj <esc>
-"inoremap ,, <Esc>
-
-let mapleader=","
-let maplocalleader = "\\"
-
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
 " " Use the same symbols as TextMate for tabstops and EOLs
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -83,6 +75,11 @@ command! -nargs=* Wrap set wrap linebreak nolist
 set showbreak=â€¦
 
 "map {{{1
+let mapleader=","
+let maplocalleader = "\\"
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
 nmap <leader>v :tabedit $MYVIMRC<cr>
 nmap <leader>t :tabedit ~/todo.md<cr>
 
@@ -95,8 +92,8 @@ nmap <leader>h :set hlsearch<cr>
 nnoremap <leader>d dd
 
 " copy insert paste mode
-nmap <localleader>p :set paste<cr>
-nmap <localleader>np :set nopaste<cr>
+nmap <leader>y :set paste<cr>
+nmap <leader>ny :set nopaste<cr>
 
 map <c-h> <c-w>h
 map <c-j> <c-w>j
@@ -145,7 +142,6 @@ filetype off
 "Vundle Settings {{{1
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
 Plugin 'The-NERD-tree'
   nmap <Leader>nt :NERDTree<cr>:set rnu<cr>
@@ -155,6 +151,9 @@ Plugin 'The-NERD-tree'
   let NERDTreeIgnore=['\.$', '\~$']
   let NREDTreeShowLineNumbers=1
   let NREDTreeWinPos=1
+
+ "各个语言的注释插件
+Plugin 'tpope/vim-commentary'
 
 Plugin 'EasyMotion'
 
@@ -190,6 +189,8 @@ Plugin 'fugitive.vim'
 " Markdown
 Plugin 'tpope/vim-markdown'
 "Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'groenewege/vim-less'
+Plugin 'wavded/vim-stylus'
 
 " coffee
 Plugin 'kchmck/vim-coffee-script'
