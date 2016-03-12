@@ -1,0 +1,21 @@
+snippet init "init" !b
+#include <stdio.h>
+
+int main( int argc, const char *argv[] ) {
+	${1}
+
+	return 0;
+}
+endsnippet
+
+snippet print "printf" !b
+printf( "$1" );
+endsnippet
+
+snippet initH "init .h" !b
+#ifndef _${1:ARRAY}_
+#define _$1_
+${0}
+
+#endif
+endsnippet

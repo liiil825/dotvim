@@ -7,6 +7,10 @@ set t_RV=                       " http://bugs.debian.org/608242
 syntax on                       " turn syntax highlighting on by default
 filetype on                     " detect type of file
 
+set encoding=utf-8
+set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1 " 如果你要打开的文件编码不在此列，那就添加进去
+set termencoding=utf-8 "
+
 set nobackup                    " do not keep a backup file
 set novisualbell                " turn off visual bell
 set visualbell t_vb=            " turn off error beep/flash
@@ -26,10 +30,18 @@ set incsearch                   " do incremental searching
 set ignorecase                  " ignore case when searching
 set smartcase                   " no ignorecase if Uppercase char present
 
+set timeout timeoutlen=5000 ttimeoutlen=100 " the solution -> Delay before 'O'
+
 " Default indenting options
 set expandtab smarttab
 set autoindent smartindent shiftround
 set ts=2 sts=2 sw=2 expandtab
+
+set wildmode=list " auto-complete mode
+
+function! ChangeToStyles()
+  :%s/;//g | :%s/ \?{//g | :%s/}//g
+endfunction
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd") "{{{1
@@ -41,10 +53,16 @@ if has("autocmd") "{{{1
   " Treat .rss files as XML
 
   autocmd BufNewFile,BufRead *.md set ts=4 sts=4 sw=4 noexpandtab
+  autocmd BufNewFile,BufRead *.js set ts=2 sts=2 sw=2 expandtab
+  autocmd BufNewFile,BufRead *.h set filetype=c
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.rss setfiletype xml
   autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
   autocmd BufRead,BufNewFile *.erb setfiletype eruby
+  autocmd BufNewFile,BufReadPost *.c map <leader>r :w\|!gcc % && ./a.out<cr>
+  autocmd BufNewFile,BufReadPost *.js map <leader>r :w\|!node %
+  autocmd BufWritePre  *.sass,*.styl nnoremap <leader>t :call ChangeToStyles();<cr>
+
 
   " auto source .vimrc
   autocmd BufWritePost .vimrc source $MYVIMRC
@@ -59,8 +77,10 @@ set background=dark
 let g:solarized_termcolors = 256
 " let g:solarized_visibility = "high"
 " let g:solarized_contrast = "high"
-" colorscheme solarized
-colorscheme gruvbox
+colorscheme solarized
+" colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 " Make comments and special characters look better
 highlight Comment    ctermfg=245 guifg=#8a8a8a
@@ -79,17 +99,16 @@ let mapleader=","
 let maplocalleader = "\\"
 
 " Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list!<cr>
+nmap <leader>m :set number!<cr>
 nmap <leader>v :tabedit $MYVIMRC<cr>
-nmap <leader>t :tabedit ~/todo.md<cr>
+" nmap <leader>t :tabedit ~/todo.md<cr>
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
 " leader save
 nmap <leader><space> :w<cr>
 nmap <leader>q :q<cr>
-nmap <leader>n :set nohlsearch<cr>
 nmap <leader>h :set hlsearch<cr>
-"leaderd delete
-nnoremap <leader>d dd
 
 " copy insert paste mode
 nmap <leader>y :set paste<cr>
@@ -142,20 +161,10 @@ filetype off
 "Vundle Settings {{{1
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'The-NERD-tree'
-  nmap <Leader>nt :NERDTree<cr>:set rnu<cr>
-  let NERDTreeShowBookmarks=1
-  let NERDTreeShowFiles=1
-  let NERDTreeShowhidden=1
-  let NERDTreeIgnore=['\.$', '\~$']
-  let NREDTreeShowLineNumbers=1
-  let NREDTreeWinPos=1
-
- "各个语言的注释插件
-Plugin 'tpope/vim-commentary'
+Plugin 'https://github.com/VundleVim/Vundle.vim.git'
 
 Plugin 'EasyMotion'
+Plugin 'Townk/vim-autoclose'
 
 Plugin 'ShowTrailingWhitespace'
 
@@ -183,19 +192,42 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Aligning text
 Plugin 'godlygeek/tabular'
 
-" A Git wrapper so awesome, ti should be illegal
-Plugin 'fugitive.vim'
 
 " Markdown
 Plugin 'tpope/vim-markdown'
-"Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'nelstrom/vim-markdown-folding'
+
+Plugin 'isRuslan/vim-es6'
 Plugin 'groenewege/vim-less'
 Plugin 'wavded/vim-stylus'
+Plugin 'othree/html5.vim'
 
 " coffee
 Plugin 'kchmck/vim-coffee-script'
+" react jsx
+Plugin 'mxw/vim-jsx'
 
-" Bundle 'vim-tmux-runner'
+Plugin 'Lokaltog/vim-powerline'
+  let g:Powerline_symbols = 'fancy'
+
+Plugin 'kien/ctrlp.vim' " fuzzy find files
+Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
+  nmap <Leader>nt :NERDTree<cr>:set rnu<cr>
+  let NERDTreeShowBookmarks=1
+  let NERDTreeShowFiles=1
+  let NERDTreeShowhidden=1
+  let NERDTreeIgnore=['\.$', '\~$']
+  let NREDTreeShowLineNumbers=1
+  let NREDTreeWinPos=1
+
+Plugin 'benmills/vimux'
+
+" A Git wrapper so awesome, ti should be illegal
+Plugin 'tpope/vim-fugitive' " the ultimate git helper
+
+ "各个语言的注释插件
+Plugin 'tpope/vim-commentary'
+
 "}
 call vundle#end()
 filetype indent on              " load indent file for specific file type
