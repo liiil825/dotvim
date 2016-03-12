@@ -10,3 +10,4 @@ Create symlinks:
 
   vim .vimrc
   :PluginInstall
+
