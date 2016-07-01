@@ -53,6 +53,7 @@ if has("autocmd") "{{{1
   " Treat .rss files as XML
 
   autocmd BufNewFile,BufRead *.md set ts=4 sts=4 sw=4 noexpandtab
+  autocmd BufNewFile,BufRead *.js set ts=2 sts=2 sw=2 expandtab
   autocmd BufNewFile,BufRead *.h set filetype=c
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.rss setfiletype xml
@@ -64,11 +65,16 @@ if has("autocmd") "{{{1
 
 
   " auto source .vimrc
-  autocmd BufWritePost .vimrc source MYVIMRC
+  autocmd BufWritePost .vimrc source $MYVIMRC
 endif
 
 " Identify invisible characters and don't show them by default
 "set list listchars=eol:¬,tab:▸\ ,trail:.,
+
+" js standard
+let g:syntastic_javascript_checkers = ['standard']
+" autocmd bufwritepost *.js silent !standard-format -w %
+set autoread
 
 set t_Co=256 """{{{1
 set background=dark
@@ -86,7 +92,6 @@ highlight Comment    ctermfg=245 guifg=#8a8a8a
 highlight NonText    ctermfg=240 guifg=#585858
 highlight SpecialKey ctermfg=240 guifg=#585858
 
-set nocompatible
 " " Use the same symbols as TextMate for tabstops and EOLs
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -106,6 +111,9 @@ nmap <leader>t :call RemoveTab()<cr>
 nmap <leader>l :set list!<cr>
 nmap <leader>m :set number!<cr>
 nmap <leader>v :tabedit $MYVIMRC<cr>
+nmap <leader>a :tabedit .<cr>
+nmap <leader>e :e %:h<cr>
+nmap <leader>v :vs %:h<cr>
 " nmap <leader>t :tabedit ~/todo.md<cr>
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
@@ -172,18 +180,24 @@ Plugin 'Townk/vim-autoclose'
 
 Plugin 'ShowTrailingWhitespace'
 
-Plugin '_jsbeautify'
+" Plugin '_jsbeautify'
 
 Plugin 'UltiSnips'
-  let g:UltiSnipsSnippetDirectories=['UltiSnips']
+  let g:UltiSnipsSnippetDirectories = ['UltiSnips']
   let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
   let g:UltiSnipsExpandTrigger = '<Tab>'
   let g:UltiSnipsListSnippets = '<C-Tab>'
   let g:UltiSnipsJumpForwardTrigger = '<Tab>'
   let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
-Plugin 'vim-javascript'
-Plugin 'asins/vimcdoc'
+Plugin 'pangloss/vim-javascript'
+let g:javascript_enable_domhtmlcss = 1
+let g:javascript_ignore_javaScriptdoc = 1
+set foldmethod=syntax
+set foldlevelstart=1
+
+let javaScript_fold=1
+
 Plugin 'jade.vim'
 
 Plugin 'mattn/emmet-vim'
@@ -211,9 +225,6 @@ Plugin 'kchmck/vim-coffee-script'
 " react jsx
 Plugin 'mxw/vim-jsx'
 
-Plugin 'Lokaltog/vim-powerline'
-  let g:Powerline_symbols = 'fancy'
-
 Plugin 'kien/ctrlp.vim' " fuzzy find files
 Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
   nmap <Leader>nt :NERDTree<cr>:set rnu<cr>
@@ -224,16 +235,41 @@ Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
   let NREDTreeShowLineNumbers=1
   let NREDTreeWinPos=1
 
-Plugin 'benmills/vimux'
+" Plugin 'benmills/vimux'
 
 " A Git wrapper so awesome, ti should be illegal
 Plugin 'tpope/vim-fugitive' " the ultimate git helper
 
- "各个语言的注释插件
+" 各个语言的注释插件
 Plugin 'tpope/vim-commentary'
+
+" Plugin 'Lokaltog/vim-powerline'
+" let g:Powerline_symbols = 'fancy'
+"
+Plugin 'scrooloose/syntastic'
 
 "}
 call vundle#end()
 filetype indent on              " load indent file for specific file type
 filetype plugin indent on " Alternative: use the following to also enable language-dependent indenting.
 
+set rtp+=/Users/lizhi/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+
+" These lines setup the environment to show graphics and colors correctly.
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
+let g:minBufExplForceSyntaxEnable = 1
+
+" if ! has('gui_running')
+"    set ttimeoutlen=10
+"    augroup FastEscape
+"       autocmd!
+"       au InsertEnter * set timeoutlen=0
+"       au InsertLeave * set timeoutlen=1000
+"    augroup END
+" endif
+
+set laststatus=2 " Always display the statusline in all windows
+set guifont=Cousine\ for\ Powerline
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)

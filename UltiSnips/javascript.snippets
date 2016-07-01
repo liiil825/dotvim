@@ -172,20 +172,6 @@ ${VISUAL}$0
 }
 endsnippet
 
-snippet define
-define([
-	'backbone',
-	'underscore',
-	'jquery'
-], function (
-	BB,
-	_,
-	$
-) {
-	var ${1:Model} = BB.$1.extend({
-		$0
-	});
-
-	return $1;
-});
+snippet import
+import { ${1:connect} } from '${2:react-redux}'
 endsnippet
