@@ -71,9 +71,6 @@ endif
 " Identify invisible characters and don't show them by default
 "set list listchars=eol:¬,tab:▸\ ,trail:.,
 
-" js standard
-let g:syntastic_javascript_checkers = ['standard']
-" autocmd bufwritepost *.js silent !standard-format -w %
 set autoread
 
 set t_Co=256 """{{{1
@@ -113,7 +110,8 @@ nmap <leader>m :set number!<cr>
 nmap <leader>v :tabedit $MYVIMRC<cr>
 nmap <leader>a :tabedit .<cr>
 nmap <leader>e :e %:h<cr>
-nmap <leader>v :vs %:h<cr>
+nmap <leader>s :vs %:h<cr>
+nmap <leader>ne :e .<cr>
 " nmap <leader>t :tabedit ~/todo.md<cr>
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
@@ -246,7 +244,20 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'Lokaltog/vim-powerline'
 " let g:Powerline_symbols = 'fancy'
 "
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exec = 'eslint'
+" let g:ycm_show_diagnostics_ui = 0
+" autocmd bufwritepost *.js silent !standard-format -w %
+"
+Plugin 'rizzatti/dash.vim'
 
 "}
 call vundle#end()
