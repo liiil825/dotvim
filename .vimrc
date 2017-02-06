@@ -29,6 +29,7 @@ set hlsearch                    " highlight searches
 set incsearch                   " do incremental searching
 set ignorecase                  " ignore case when searching
 set smartcase                   " no ignorecase if Uppercase char present
+set backupcopy=yes
 
 set timeout timeoutlen=5000 ttimeoutlen=100 " the solution -> Delay before 'O'
 
@@ -244,6 +245,16 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'Lokaltog/vim-powerline'
 " let g:Powerline_symbols = 'fancy'
 "
+Plugin 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Plugin 'scrooloose/syntastic'
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
