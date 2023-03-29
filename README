@@ -1,13 +1,19 @@
-Installation:
-
+## Installation:
+```
   git clone http://github.com/liiil825/dotvim.git ~/.vim
   git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+```
 
 
-Create symlinks:
+## Create symlinks:
+```
+  cd ~
+  ln -s .vim/.vimrc .vimrc
+```
 
-  ln -s ~/.vim/.vimrc ~/.vimrc
-
+## Install Plugin
+```
   vim .vimrc
   :PluginInstall
+```
 
